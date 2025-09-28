@@ -1,2 +1,73 @@
-# Auto detect text files and perform LF normalization
-* text=auto
+import java.util.Scanner;
+ /*************************
+// Projeto - Desafio ContaBancaria JAVA
+    Criar um Programa que interaja com o usuário apartir de inputs do teclado.
+    Controlando uma conta e gerando um Loop que dê opções para o usuário:
+     1- Consultar saldos
+     2- Receber valor
+     3- Transferir valor
+     4- Sair
+ *************************/
+
+public class Conta_Bancaria {
+    public static void main(String[] args) {
+
+        Scanner input = new Scanner(System.in);
+        //Dados Cliente
+        String nomeCliente = "Rodrigo Coradini";
+        String tipoConta = "Corrente";
+        double saldo = 5000.00;
+
+        //Gerando o loop de Operações
+        boolean lopp = true;
+        while (lopp){
+            System.out.println("""
+                    ***************************
+                        Operações
+                    
+                    1- Consultar saldos
+                    2- Receber valor
+                    3- Transferir valor
+                    4- Sair
+                    
+                    Digite a opção desejada:
+                    ***************************\n""");
+            int operacao = Integer.parseInt(input.nextLine());
+            // Realizar Consultas de Saldo
+            if (operacao == 1) {
+                System.out.println("\nSeu Saldo Atual é de: R$" + saldo + "\n");
+            }
+            // Receber Valor
+            if (operacao == 2) {
+                System.out.println("\nDigite o Valor à ser Adicionado: ");
+                int valorAdicionar = Integer.parseInt(input.nextLine());
+                if (valorAdicionar < 0 ){
+                    System.out.println("\nOpção de Operação Inválida!!\n");
+                } else {
+                    saldo += valorAdicionar;
+                    System.out.println("\nSaldo Atualizado: R$" + saldo + "\n");
+                }
+            }
+            //Transferir Valor
+            if (operacao == 3) {
+                System.out.println("\nDigite o Valor a ser Transferido: ");
+                int valorRetirar = Integer.parseInt(input.nextLine());
+                if (valorRetirar > saldo || valorRetirar <0) {
+                    System.out.println("Operação Indisponível (Saldo Insuficiente ou Opção Inválida)\n");
+                } else {
+                    saldo -= valorRetirar;
+                    System.out.println(("\nSaldo Atualizado: R$" + saldo + "\n"));
+                }
+            }
+            // Sair da Aplicação
+            if (operacao == 4) {
+                System.out.println("Foi um Prazer Tê-lo como Usuário!");
+                break;
+            }
+            //Tratando o Erro
+            if (operacao != 1 && operacao != 2 && operacao != 3 && operacao != 4){
+                System.out.println("\nOpção Inválida! (Digite Novamente)\n");
+            }
+        }
+    }
+}
